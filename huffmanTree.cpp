@@ -23,6 +23,23 @@ class huffmanType
         };
 
         nodeType *root, **envPtr;
-        
+
+        void put(nodeType *p) {
+            nodeType **dp;
+            dp = &root;
+            while(*dp && (*dp)->weight <= p->weight) {
+                dp = &(*dp)->next;
+            }
+            p->next = *dp;
+            *dp = p;
+        }
+
+        void altprintHuffTree(nodeType *p, int lvl) {
+            if(p) {
+                cout << p->ch << " " << p->weight << " " << lvl << "\n";
+                altprintHuffTree(p->zero, ++lvl);
+                altprintHuffTree(p->one, ++lvl);
+            }
+        }
 
 };
