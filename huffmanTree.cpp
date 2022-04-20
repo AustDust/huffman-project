@@ -117,6 +117,22 @@ class huffmanType
             altprintHuffTree(root, 0);
         }
 
+        void encode(char i) {
+            nodeType **dp;
+            dp = &root;
+            while((*dp)->one && (*dp)->zero) {
+                if(isThere((*dp)->zero, i)) {
+                    cout << "0";
+                    dp = &(*dp)->zero;
+                }
+                else {
+                    cout << "1";
+                    dp = &(*dp)->one;
+                }
+
+            }
+        }
+
 };
 
 void printMap(map<char, int> m)
@@ -169,6 +185,14 @@ int main()
 
     cout << "\n\nPrinting Huffman Tree\n\n";
     test.printHuffTree();
+
+    cout << "\n\nPrinting Character Encoding\n\n";
+    for(auto it = charMap.begin(); it != charMap.end(); ++it)
+    {
+        cout << it->first << "\t";
+        test.encode(it->first);
+        cout << endl;
+    }
 
     return 0;
 }
